@@ -1,0 +1,11 @@
+{
+  "title": "3",
+  "description": "Explore a captivating web experience showcasing animals and living creatures through stunning 3D designs and immersive animated backgrounds.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

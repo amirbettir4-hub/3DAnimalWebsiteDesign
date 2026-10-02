@@ -634,7 +634,7 @@ const species = [
     image:
       "https://images.unsplash.com/photo-1587606605848-7395dfb56d90?auto=format&fit=crop&w=1400&q=88",
   },
-  // --- NEW ANIMALS ADDED BELOW ---
+  // --- NEW ANIMALS ADDED BELOW (WITH FIXED IMAGES) ---
   {
     name: "Arctic fox",
     scientific: "Vulpes lagopus",

@@ -634,106 +634,6 @@ const species = [
     image:
       "https://images.unsplash.com/photo-1587606605848-7395dfb56d90?auto=format&fit=crop&w=1400&q=88",
   },
-  // --- NEW ANIMALS ADDED BELOW (WITH FIXED IMAGES) ---
-  {
-    name: "Arctic fox",
-    scientific: "Vulpes lagopus",
-    habitat: "Land",
-    region: "Arctic tundra",
-    status: "Stable",
-    image:
-      "https://images.unsplash.com/photo-1517782831741-89712bcd65a7?auto=format&fit=crop&w=1400&q=88",
-  },
-  {
-    name: "Axolotl",
-    scientific: "Ambystoma mexicanum",
-    habitat: "Wetlands",
-    region: "Mexico City canals",
-    status: "Critically endangered",
-    image:
-      "https://images.unsplash.com/photo-1534912557074-6d8c2e2f0c2b?auto=format&fit=crop&w=1400&q=88",
-  },
-  {
-    name: "Bald eagle",
-    scientific: "Haliaeetus leucocephalus",
-    habitat: "Air",
-    region: "North America",
-    status: "Recovered",
-    image:
-      "https://images.unsplash.com/photo-1611689342806-0863700ce1e4?auto=format&fit=crop&w=1400&q=88",
-  },
-  {
-    name: "Giant anteater",
-    scientific: "Myrmecophaga tridactyla",
-    habitat: "Land",
-    region: "Central and South America",
-    status: "Vulnerable",
-    image:
-      "https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=1400&q=88",
-  },
-  {
-    name: "Golden eagle",
-    scientific: "Aquila chrysaetos",
-    habitat: "Air",
-    region: "Northern hemisphere",
-    status: "Stable",
-    image:
-      "https://images.unsplash.com/photo-1555169062-013468b47731?auto=format&fit=crop&w=1400&q=88",
-  },
-  {
-    name: "Green tree python",
-    scientific: "Morelia viridis",
-    habitat: "Wetlands",
-    region: "New Guinea and Australia",
-    status: "Stable",
-    image:
-      "https://images.unsplash.com/photo-1531386151447-fd76ad50012f?auto=format&fit=crop&w=1400&q=88",
-  },
-  {
-    name: "King cobra",
-    scientific: "Ophiophagus hannah",
-    habitat: "Wetlands",
-    region: "Southeast Asia",
-    status: "Vulnerable",
-    image:
-      "https://images.unsplash.com/photo-1590766940554-19461e55e4c4?auto=format&fit=crop&w=1400&q=88",
-  },
-  {
-    name: "Pangolin",
-    scientific: "Manis pentadactyla",
-    habitat: "Land",
-    region: "Southern China and Southeast Asia",
-    status: "Critically endangered",
-    image:
-      "https://images.unsplash.com/photo-1591825729269-caeb344f6df2?auto=format&fit=crop&w=1400&q=88",
-  },
-  {
-    name: "Platypus",
-    scientific: "Ornithorhynchus anatinus",
-    habitat: "Wetlands",
-    region: "Eastern Australia",
-    status: "Near threatened",
-    image:
-      "https://images.unsplash.com/photo-1614966115554-7b2f1c1b1c8b?auto=format&fit=crop&w=1400&q=88",
-  },
-  {
-    name: "Quokka",
-    scientific: "Setonix brachyurus",
-    habitat: "Land",
-    region: "Rottnest Island, Australia",
-    status: "Vulnerable",
-    image:
-      "https://images.unsplash.com/photo-1591389703635-e15a07b842d7?auto=format&fit=crop&w=1400&q=88",
-  },
-  {
-    name: "Narwhal",
-    scientific: "Monodon monoceros",
-    habitat: "Ocean",
-    region: "Arctic waters",
-    status: "Vulnerable",
-    image:
-      "https://images.unsplash.com/photo-1570481662006-a3a1374699e8?auto=format&fit=crop&w=1400&q=88",
-  },
 ] as const;
 
 type SpeciesDetail = {
@@ -815,18 +715,6 @@ const speciesDetails: Record<(typeof species)[number]["scientific"], SpeciesDeta
   "Okapia johnstoni": { diet: "Leaves, buds, fruit", lifespan: "20–30 years", size: "1.9–2.5 metres", activity: "Daytime", fact: "The okapi is the giraffe's closest living relative despite its zebra-like leg stripes." },
   "Connochaetes taurinus": { diet: "Short grasses", lifespan: "15–20 years", size: "1.7–2.4 metres", activity: "Daytime", fact: "Vast herds follow seasonal rains in one of the planet's largest land migrations." },
   "Aptenodytes forsteri": { diet: "Fish, krill, squid", lifespan: "15–20 years", size: "100–130 cm", activity: "Day and night", fact: "Males incubate a single egg on their feet through the Antarctic winter without feeding." },
-  // --- NEW SPECIES DETAILS ---
-  "Vulpes lagopus": { diet: "Lemmings, voles, birds", lifespan: "3–6 years", size: "46–68 cm", activity: "Day and night", fact: "Its thick, white winter coat provides both warmth and camouflage in the snow." },
-  "Ambystoma mexicanum": { diet: "Worms, insects, small fish", lifespan: "10–15 years", size: "15–30 cm", activity: "Nocturnal", fact: "The axolotl can regenerate its limbs, spinal cord, and even parts of its heart." },
-  "Haliaeetus leucocephalus": { diet: "Fish, waterfowl", lifespan: "20–30 years", size: "70–102 cm", activity: "Daytime", fact: "Its iconic white head and tail feathers don't fully appear until it reaches maturity at around 5 years old." },
-  "Myrmecophaga tridactyla": { diet: "Ants, termites", lifespan: "14–16 years", size: "1.8–2.2 metres", activity: "Day and night", fact: "Its tongue can extend up to 60 cm and is covered in sticky saliva to capture insects." },
-  "Aquila chrysaetos": { diet: "Rabbits, squirrels, birds", lifespan: "20–30 years", size: "66–102 cm", activity: "Daytime", fact: "Golden eagles can dive at speeds of over 240 km/h when hunting." },
-  "Morelia viridis": { diet: "Small mammals, reptiles", lifespan: "15–20 years", size: "1.2–2.2 metres", activity: "Nocturnal", fact: "Juveniles are bright yellow or red, only turning emerald green as they mature." },
-  "Ophiophagus hannah": { diet: "Other snakes", lifespan: "20 years", size: "3–5.5 metres", activity: "Daytime", fact: "It is the world's longest venomous snake and can 'stand up' to a third of its body length." },
-  "Manis pentadactyla": { diet: "Ants, termites", lifespan: "Unknown in wild", size: "40–58 cm", activity: "Nocturnal", fact: "Its scales are made of keratin, the same material as human hair and fingernails." },
-  "Ornithorhynchus anatinus": { diet: "Aquatic insects, larvae", lifespan: "10–17 years", size: "38–60 cm", activity: "Nocturnal", fact: "Males have a venomous spur on their hind legs, an unusual trait among mammals." },
-  "Setonix brachyurus": { diet: "Grasses, leaves", lifespan: "5–10 years", size: "40–54 cm", activity: "Nocturnal", fact: "Quokkas are famous for their friendly, 'smiling' appearance and lack of fear toward humans." },
-  "Monodon monoceros": { diet: "Squid, fish, shrimp", lifespan: "30–50 years", size: "4–5.5 metres", activity: "Day and night", fact: "Its long, spiral tusk is actually an elongated tooth that can grow up to 3 metres." },
 };
 
 const quizQuestionBank = [

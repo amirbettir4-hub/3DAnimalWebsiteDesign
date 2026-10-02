@@ -117,7 +117,7 @@ button {
   mix-blend-mode: difference;
 }
 
-.brand, .nav-links button, .menu-button, .sound-toggle {
+.brand, .nav-links button, .menu-button, .sound-toggle, .theme-toggle {
   border: 0;
   background: transparent;
   cursor: pointer;
@@ -222,6 +222,30 @@ button {
   font-style: normal;
   letter-spacing: .12em;
   text-transform: uppercase;
+}
+
+/* 🌞🌚 THEME TOGGLE BUTTON 🌞🌚 */
+.theme-toggle {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 18px;
+  padding: 0;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+}
+
+.theme-toggle:hover {
+  transform: rotate(25deg) scale(1.15);
+}
+
+.theme-toggle:active {
+  transform: rotate(-15deg) scale(.95);
 }
 
 .menu-button {
@@ -2259,6 +2283,375 @@ footer p {
   50% { opacity: 1; transform: scale(1.15); }
 }
 
+/* 🌞🌚 ============================================
+   LIGHT MODE OVERRIDES
+   Dark mode stays exactly the same.
+   When user clicks the toggle, [data-theme="light"]
+   is applied on the <html> element and these rules
+   kick in.
+   ============================================ */
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+[data-theme="light"] html,
+[data-theme="light"] body {
+  background: #f1ede2;
+  color: #1a201a;
+}
+
+[data-theme="light"] .cursor-dot {
+  background: #4a7050;
+  box-shadow: 0 0 12px rgba(74,112,80,.7);
+}
+
+[data-theme="light"] .cursor-ring {
+  border-color: rgba(74,112,80,.65);
+}
+
+[data-theme="light"] .cursor-ring.is-active {
+  background: rgba(74,112,80,.18);
+}
+
+[data-theme="light"] .cursor-ring.is-image {
+  background: #4a7050;
+}
+
+[data-theme="light"] .page-progress {
+  background: #4a7050;
+}
+
+/* ─── SPECIMEN (dark → light) ─── */
+[data-theme="light"] .specimen {
+  background:
+    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(120,170,130,.35), transparent 38%),
+    #e8ecdc;
+  color: #1a241a;
+}
+
+[data-theme="light"] .specimen::before {
+  border-color: rgba(74,112,80,.15);
+  box-shadow: 0 0 0 8vw rgba(74,112,80,.04), 0 0 0 17vw rgba(74,112,80,.025);
+}
+
+[data-theme="light"] .specimen .eyebrow {
+  color: #4a7050;
+}
+
+[data-theme="light"] .specimen .eyebrow span {
+  border-color: rgba(74,112,80,.4);
+}
+
+[data-theme="light"] .specimen h2 {
+  color: #1a241a;
+}
+
+[data-theme="light"] .specimen h2 em {
+  color: #4a7050;
+}
+
+[data-theme="light"] .specimen-description {
+  color: rgba(26,36,26,.68);
+}
+
+[data-theme="light"] .specimen-facts span {
+  color: #607a55;
+}
+
+[data-theme="light"] .specimen-facts p {
+  color: rgba(26,36,26,.5);
+}
+
+[data-theme="light"] .specimen-facts strong {
+  color: #1a241a;
+}
+
+[data-theme="light"] .model-shadow {
+  background: rgba(74,112,80,.22);
+}
+
+[data-theme="light"] .specimen-lens {
+  background: #c8ddc0;
+  border-color: rgba(74,112,80,.35);
+  box-shadow:
+    0 45px 100px rgba(74,112,80,.18),
+    0 0 80px rgba(74,112,80,.1),
+    inset 0 0 60px rgba(255,255,255,.4);
+}
+
+[data-theme="light"] .lens-image {
+  filter: contrast(1.05) saturate(.95) brightness(.98);
+}
+
+[data-theme="light"] .lens-refraction {
+  background:
+    radial-gradient(circle at 37% 34%, transparent 0 18%, rgba(255,255,255,.35) 32%, transparent 58%),
+    linear-gradient(140deg, rgba(255,255,255,.4), transparent 34%, rgba(74,112,80,.2) 76%);
+  box-shadow: inset -24px -30px 50px rgba(74,112,80,.22), inset 22px 20px 45px rgba(255,255,255,.35);
+}
+
+[data-theme="light"] .lens-shine {
+  background: linear-gradient(180deg, rgba(255,255,255,.55), transparent);
+}
+
+[data-theme="light"] .lens-grid {
+  border-color: rgba(74,112,80,.25);
+}
+
+[data-theme="light"] .lens-grid::before,
+[data-theme="light"] .lens-grid::after {
+  background: rgba(74,112,80,.18);
+}
+
+[data-theme="light"] .lens-grid span {
+  background: #4a7050;
+  box-shadow: 0 0 12px rgba(74,112,80,.7);
+}
+
+[data-theme="light"] .lens-label {
+  border-color: rgba(74,112,80,.25);
+  background: rgba(255,255,255,.75);
+  color: #1a241a;
+}
+
+[data-theme="light"] .lens-label small {
+  color: rgba(26,36,26,.6);
+}
+
+[data-theme="light"] .model-orbit {
+  border-color: rgba(74,112,80,.3);
+}
+
+[data-theme="light"] .model-orbit span {
+  background: #4a7050;
+  box-shadow: 0 0 18px rgba(74,112,80,.6);
+}
+
+[data-theme="light"] .model-node {
+  border-color: rgba(74,112,80,.6);
+  box-shadow: 0 0 14px rgba(74,112,80,.6);
+}
+
+[data-theme="light"] .drag-note {
+  color: rgba(26,36,26,.45);
+}
+
+[data-theme="light"] .specimen-index {
+  color: rgba(26,36,26,.5);
+}
+
+/* ─── ARCHIVE (dark → light) ─── */
+[data-theme="light"] .archive {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(120,170,130,.18), transparent 30%),
+    #ebe9dc;
+  color: #1a201a;
+}
+
+[data-theme="light"] .archive::before {
+  color: rgba(74,112,80,.05);
+}
+
+[data-theme="light"] .archive .eyebrow {
+  color: #4a7050;
+}
+
+[data-theme="light"] .archive .eyebrow span {
+  border-color: rgba(74,112,80,.4);
+}
+
+[data-theme="light"] .archive-intro h2 {
+  color: #1a201a;
+}
+
+[data-theme="light"] .archive-intro h2 em {
+  color: #4a7050;
+}
+
+[data-theme="light"] .archive-controls > p {
+  color: rgba(26,32,26,.68);
+}
+
+[data-theme="light"] .habitat-filter button {
+  border-color: rgba(26,32,26,.2);
+  color: rgba(26,32,26,.6);
+}
+
+[data-theme="light"] .habitat-filter button:hover,
+[data-theme="light"] .habitat-filter button.active {
+  border-color: #4a7050;
+  color: #f1ede2;
+  background: #4a7050;
+}
+
+[data-theme="light"] .species-content p {
+  color: #5a7550;
+}
+
+[data-theme="light"] .species-content h3 {
+  color: #1a201a;
+}
+
+[data-theme="light"] .species-meta {
+  color: rgba(26,32,26,.55);
+}
+
+[data-theme="light"] .species-meta i {
+  background: #4a7050;
+  box-shadow: 0 0 8px rgba(74,112,80,.6);
+}
+
+[data-theme="light"] .species-habitat {
+  border-color: rgba(26,32,26,.35);
+  color: #1a201a;
+}
+
+[data-theme="light"] .species-number {
+  color: #1a201a;
+}
+
+[data-theme="light"] .archive-footer {
+  border-top-color: rgba(26,32,26,.18);
+  color: rgba(26,32,26,.55);
+}
+
+[data-theme="light"] .archive-footer span {
+  color: #4a7050;
+}
+
+[data-theme="light"] .archive-pagination {
+  border-top-color: rgba(26,32,26,.18);
+  border-bottom-color: rgba(26,32,26,.18);
+}
+
+[data-theme="light"] .archive-pagination button {
+  color: rgba(26,32,26,.6);
+}
+
+[data-theme="light"] .archive-pagination button:hover,
+[data-theme="light"] .archive-pagination button.active {
+  color: #1a201a;
+}
+
+[data-theme="light"] .archive-pagination > div button {
+  border-color: rgba(26,32,26,.2);
+}
+
+[data-theme="light"] .archive-pagination > div button.active {
+  border-color: #4a7050;
+  color: #f1ede2;
+  background: #4a7050;
+}
+
+/* ─── FOOTER (dark → light) ─── */
+[data-theme="light"] footer {
+  border-top-color: rgba(26,32,26,.1);
+  background: #f1ede2;
+}
+
+[data-theme="light"] footer p {
+  color: rgba(26,32,26,.55);
+}
+
+/* ─── SPECIES MODAL (dark → light) ─── */
+[data-theme="light"] .species-modal {
+  background: rgba(240,236,224,.9);
+}
+
+[data-theme="light"] .modal-panel {
+  border-color: rgba(26,32,26,.15);
+  background: #ebe9dc;
+  box-shadow: 0 45px 120px rgba(74,80,60,.25);
+}
+
+[data-theme="light"] .modal-content {
+  color: #1a201a;
+}
+
+[data-theme="light"] .modal-content h2 {
+  color: #1a201a;
+}
+
+[data-theme="light"] .modal-kicker {
+  color: #4a7050;
+}
+
+[data-theme="light"] .modal-scientific {
+  color: #4a7050;
+}
+
+[data-theme="light"] .modal-description {
+  color: rgba(26,32,26,.72);
+}
+
+[data-theme="light"] .modal-data {
+  border-top-color: rgba(26,32,26,.15);
+  border-bottom-color: rgba(26,32,26,.15);
+}
+
+[data-theme="light"] .modal-data div:nth-child(n+4) {
+  border-top-color: rgba(26,32,26,.1);
+}
+
+[data-theme="light"] .modal-data span {
+  color: rgba(26,32,26,.5);
+}
+
+[data-theme="light"] .modal-data strong {
+  color: #1a201a;
+}
+
+[data-theme="light"] .modal-observation {
+  color: rgba(26,32,26,.55);
+}
+
+[data-theme="light"] .modal-observation p {
+  color: rgba(26,32,26,.65);
+}
+
+[data-theme="light"] .modal-observation strong {
+  color: #4a7050;
+}
+
+[data-theme="light"] .modal-learning div {
+  border-color: rgba(26,32,26,.13);
+  background: rgba(74,112,80,.04);
+}
+
+[data-theme="light"] .modal-learning span {
+  color: #4a7050;
+}
+
+[data-theme="light"] .modal-learning p {
+  color: rgba(26,32,26,.68);
+}
+
+[data-theme="light"] .modal-nav button {
+  color: rgba(26,32,26,.6);
+}
+
+[data-theme="light"] .modal-nav button:hover {
+  color: #1a201a;
+}
+
+[data-theme="light"] .modal-close {
+  border-color: rgba(26,32,26,.3);
+  color: #1a201a;
+  background: rgba(255,255,255,.5);
+}
+
+[data-theme="light"] .modal-close:hover {
+  color: #ebe9dc;
+  background: #1a201a;
+}
+
+[data-theme="light"] .modal-image > span,
+[data-theme="light"] .modal-image > p {
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
+
 @media (max-width: 760px) {
   .nav-shell { padding: 22px 20px; }
   .brand { margin-right: auto; }
@@ -2282,9 +2675,15 @@ footer p {
     padding: 0;
   }
   .sound-toggle {
-    margin-right: 18px;
+    margin-right: 14px;
   }
   .sound-toggle i { display: none; }
+  .theme-toggle {
+    margin-right: 14px;
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
   .menu-button span {
     width: 100%;
     height: 1px;

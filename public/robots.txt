@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Block build artifacts and dev files
+Disallow: /assets/*.map
+Disallow: /node_modules/
+
 Sitemap: https://amir-wildform.vercel.app/sitemap.xml

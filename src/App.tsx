@@ -216,6 +216,7 @@ function conservationContext(status: string) {
 
 function ArrowIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>; }
 function ShuffleIcon() { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 3h5v5" /><path d="M4 20 21 3" /><path d="M21 16v5h-5" /><path d="m15 15 6 6" /><path d="M4 4l5 5" /></svg>; }
+function CompareIcon() { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v18" /><path d="M5 8l-3 5h6z" /><path d="M19 8l-3 5h6z" /><path d="M2 13h6" /><path d="M16 13h6" /><path d="M5 18h4" /><path d="M15 18h4" /></svg>; }
 
 function JellySculpture() {
   return (
@@ -260,6 +261,9 @@ export default function App() {
   const [quizComplete, setQuizComplete] = useState(false);
   const [activeQuiz, setActiveQuiz] = useState(createQuiz);
   const [soundOn, setSoundOn] = useState(false);
+  const [compareOpen, setCompareOpen] = useState(false);
+  const [compareA, setCompareA] = useState(0);
+  const [compareB, setCompareB] = useState(1);
 
   const [theme, setTheme] = useState<"dark" | "light">("dark");
 
@@ -359,6 +363,15 @@ export default function App() {
     return () => { document.body.style.overflow = previousOverflow; window.removeEventListener("keydown", closeOnEscape); };
   }, [journalOpen]);
 
+  useEffect(() => {
+    if (!compareOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setCompareOpen(false); };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener("keydown", closeOnEscape); };
+  }, [compareOpen]);
+
   const goTo = (id: string) => { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); };
   const playTone = (frequency = 420) => { const audio = audioRef.current; if (!audio || !soundOn) return; const tone = audio.context.createOscillator(); const gain = audio.context.createGain(); tone.type = "sine"; tone.frequency.value = frequency; gain.gain.setValueAtTime(0, audio.context.currentTime); gain.gain.linearRampToValueAtTime(0.035, audio.context.currentTime + 0.015); gain.gain.exponentialRampToValueAtTime(0.001, audio.context.currentTime + 0.22); tone.connect(gain).connect(audio.context.destination); tone.start(); tone.stop(audio.context.currentTime + 0.24); };
 
@@ -375,6 +388,27 @@ export default function App() {
     setSelectedSpecies(next);
     playTone(280 + Math.random() * 220);
   };
+
+  const openCompare = () => {
+    const a = Math.floor(Math.random() * species.length);
+    let b = Math.floor(Math.random() * species.length);
+    if (b === a) b = (b + 1) % species.length;
+    setCompareA(a);
+    setCompareB(b);
+    setCompareOpen(true);
+    playTone(300);
+  };
+
+  const swapCompare = () => {
+    setCompareA(compareB);
+    setCompareB(compareA);
+    playTone(520);
+  };
+
+  const speciesA = species[compareA];
+  const speciesB = species[compareB];
+  const detailsA = speciesDetails[speciesA.scientific];
+  const detailsB = speciesDetails[speciesB.scientific];
 
   return (
     <main>
@@ -507,6 +541,11 @@ export default function App() {
                 <button className={habitat === item ? "active" : ""} key={item} onClick={() => { setHabitat(item); setArchivePage(0); }}>{item}</button>
               ))}
             </div>
+
+            <button className="compare-open-btn" onClick={openCompare} aria-label="Compare two species side by side">
+              <CompareIcon />
+              <span>Compare two species</span>
+            </button>
           </div>
         </div>
 
@@ -726,6 +765,104 @@ export default function App() {
               </div>
             </div>
           </article>
+        </div>
+      )}
+
+      {compareOpen && (
+        <div className="compare-modal" role="dialog" aria-modal="true" aria-label="Compare two species" onMouseDown={(event) => { if (event.target === event.currentTarget) setCompareOpen(false); }}>
+          <div className="compare-panel">
+            <button className="compare-close" onClick={() => setCompareOpen(false)} aria-label="Close comparison"><span /><span /></button>
+
+            <header className="compare-header">
+              <p className="compare-eyebrow">FIELD COMPARISON</p>
+              <h2>Two creatures, <em>side by side.</em></h2>
+            </header>
+
+            <div className="compare-grid">
+              <div className="compare-column">
+                <label className="compare-select-wrap">
+                  <span className="compare-select-label">SPECIMEN A</span>
+                  <select
+                    className="compare-select"
+                    value={compareA}
+                    onChange={(event) => setCompareA(Number(event.target.value))}
+                    aria-label="Select first species"
+                  >
+                    {species.map((s, i) => (
+                      <option key={s.scientific} value={i}>{s.name}</option>
+                    ))}
+                  </select>
+                </label>
+
+                <div className="compare-image">
+                  <img
+                    src={speciesA.image}
+                    alt={`${speciesA.name} — ${speciesA.region}`}
+                    decoding="async"
+                  />
+                </div>
+
+                <h3 className="compare-name">{speciesA.name}</h3>
+                <p className="compare-sci">{speciesA.scientific}</p>
+
+                <dl className="compare-data">
+                  <div><dt>HABITAT</dt><dd>{speciesA.habitat}</dd></div>
+                  <div><dt>RANGE</dt><dd>{speciesA.region}</dd></div>
+                  <div><dt>STATUS</dt><dd>{speciesA.status}</dd></div>
+                  <div><dt>DIET</dt><dd>{detailsA.diet}</dd></div>
+                  <div><dt>LIFESPAN</dt><dd>{detailsA.lifespan}</dd></div>
+                  <div><dt>SIZE</dt><dd>{detailsA.size}</dd></div>
+                  <div><dt>ACTIVITY</dt><dd>{detailsA.activity}</dd></div>
+                </dl>
+              </div>
+
+              <button className="compare-swap" onClick={swapCompare} aria-label="Swap species">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 4 3 8l4 4" />
+                  <path d="M3 8h13a4 4 0 0 1 4 4v0" />
+                  <path d="m17 20 4-4-4-4" />
+                  <path d="M21 16H8a4 4 0 0 1-4-4v0" />
+                </svg>
+              </button>
+
+              <div className="compare-column">
+                <label className="compare-select-wrap">
+                  <span className="compare-select-label">SPECIMEN B</span>
+                  <select
+                    className="compare-select"
+                    value={compareB}
+                    onChange={(event) => setCompareB(Number(event.target.value))}
+                    aria-label="Select second species"
+                  >
+                    {species.map((s, i) => (
+                      <option key={s.scientific} value={i}>{s.name}</option>
+                    ))}
+                  </select>
+                </label>
+
+                <div className="compare-image">
+                  <img
+                    src={speciesB.image}
+                    alt={`${speciesB.name} — ${speciesB.region}`}
+                    decoding="async"
+                  />
+                </div>
+
+                <h3 className="compare-name">{speciesB.name}</h3>
+                <p className="compare-sci">{speciesB.scientific}</p>
+
+                <dl className="compare-data">
+                  <div><dt>HABITAT</dt><dd>{speciesB.habitat}</dd></div>
+                  <div><dt>RANGE</dt><dd>{speciesB.region}</dd></div>
+                  <div><dt>STATUS</dt><dd>{speciesB.status}</dd></div>
+                  <div><dt>DIET</dt><dd>{detailsB.diet}</dd></div>
+                  <div><dt>LIFESPAN</dt><dd>{detailsB.lifespan}</dd></div>
+                  <div><dt>SIZE</dt><dd>{detailsB.size}</dd></div>
+                  <div><dt>ACTIVITY</dt><dd>{detailsB.activity}</dd></div>
+                </dl>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </main>

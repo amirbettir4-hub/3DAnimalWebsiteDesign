@@ -247,6 +247,8 @@ export default function App() {
   const [videoReady, setVideoReady] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
   const [habitat, setHabitat] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
   const [archivePage, setArchivePage] = useState(0);
   const [selectedSpecies, setSelectedSpecies] = useState<number | null>(null);
   const [journalOpen, setJournalOpen] = useState(false);
@@ -263,8 +265,22 @@ export default function App() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const filteredSpecies = species.filter((animal) => habitat === "All" || animal.habitat === habitat);
-  const archivePageCount = Math.ceil(filteredSpecies.length / 12);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setDebouncedQuery(searchQuery.trim().toLowerCase()), 150);
+    return () => window.clearTimeout(timer);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    setArchivePage(0);
+  }, [debouncedQuery, habitat]);
+
+  const filteredSpecies = species.filter((animal) => {
+    if (habitat !== "All" && animal.habitat !== habitat) return false;
+    if (!debouncedQuery) return true;
+    const haystack = `${animal.name} ${animal.scientific} ${animal.region} ${animal.status} ${animal.habitat}`.toLowerCase();
+    return haystack.includes(debouncedQuery);
+  });
+  const archivePageCount = Math.max(1, Math.ceil(filteredSpecies.length / 12));
   const pagedSpecies = filteredSpecies.slice(archivePage * 12, archivePage * 12 + 12);
 
   useEffect(() => {
@@ -430,6 +446,33 @@ export default function App() {
           <div><p className="eyebrow"><span>03</span> Living archive</p><h2>One planet.<br /><em>Infinite forms.</em></h2></div>
           <div className="archive-controls">
             <p>Explore a growing field index of creatures from mountain peaks to the deepest open water.</p>
+
+            <div className="species-search">
+              <span className="search-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m20 20-3.5-3.5" />
+                </svg>
+              </span>
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Search by name, region, or status…"
+                aria-label="Search species"
+                autoComplete="off"
+              />
+              {searchQuery && (
+                <button
+                  className="search-clear"
+                  onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
+                >
+                  ×
+                </button>
+              )}
+            </div>
+
             <div className="habitat-filter" aria-label="Filter species by habitat">
               {["All", "Land", "Ocean", "Air", "Wetlands"].map((item) => (
                 <button className={habitat === item ? "active" : ""} key={item} onClick={() => { setHabitat(item); setArchivePage(0); }}>{item}</button>
@@ -438,6 +481,12 @@ export default function App() {
           </div>
         </div>
         <div className="species-grid">
+          {pagedSpecies.length === 0 && (
+            <div className="species-empty">
+              <p>No species match "<strong>{searchQuery}</strong>".</p>
+              <button onClick={() => { setSearchQuery(""); setHabitat("All"); }}>Clear filters</button>
+            </div>
+          )}
           {pagedSpecies.map((animal, index) => (
               <button className="species-card" key={animal.scientific} onClick={() => { setSelectedSpecies(species.indexOf(animal)); playTone(330 + index * 12); }} aria-label={`Open field profile for ${animal.name}`}>
                 <div className="species-image" style={{ backgroundImage: `url(${animal.image})` }} role="img" aria-label={animal.name}>

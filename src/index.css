@@ -1098,6 +1098,108 @@ h1, h2, h3, p {
   background: #c6dcbb;
 }
 
+/* ─── Species search ────────────────────────────────────── */
+.species-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.species-search .search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+
+.species-search .search-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.species-search input[type="search"] {
+  width: 100%;
+  padding: 14px 44px 14px 44px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.species-search input[type="search"]::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.species-search input[type="search"]:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.species-search input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
+.species-search .search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 50%;
+  color: inherit;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.species-search .search-clear:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.species-empty {
+  grid-column: 1 / -1;
+  padding: 4rem 1rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.species-empty strong {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.species-empty button {
+  margin-top: 1.2rem;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.species-empty button:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
 .species-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2485,6 +2587,50 @@ footer p {
   background: #4a7050;
 }
 
+/* ─── Species search (light mode) ─── */
+[data-theme="light"] .species-search .search-icon {
+  color: rgba(26, 32, 26, 0.5);
+}
+
+[data-theme="light"] .species-search input[type="search"] {
+  background: rgba(26, 32, 26, 0.04);
+  border-color: rgba(26, 32, 26, 0.15);
+}
+
+[data-theme="light"] .species-search input[type="search"]::placeholder {
+  color: rgba(26, 32, 26, 0.45);
+}
+
+[data-theme="light"] .species-search input[type="search"]:focus {
+  border-color: rgba(74, 112, 80, 0.5);
+  background: rgba(74, 112, 80, 0.05);
+}
+
+[data-theme="light"] .species-search .search-clear {
+  background: rgba(26, 32, 26, 0.06);
+}
+
+[data-theme="light"] .species-search .search-clear:hover {
+  background: rgba(26, 32, 26, 0.12);
+}
+
+[data-theme="light"] .species-empty {
+  color: rgba(26, 32, 26, 0.6);
+}
+
+[data-theme="light"] .species-empty strong {
+  color: rgba(26, 32, 26, 0.9);
+}
+
+[data-theme="light"] .species-empty button {
+  background: rgba(26, 32, 26, 0.06);
+  border-color: rgba(26, 32, 26, 0.15);
+}
+
+[data-theme="light"] .species-empty button:hover {
+  background: rgba(26, 32, 26, 0.12);
+}
+
 [data-theme="light"] .species-content p {
   color: #5a7550;
 }
@@ -2720,6 +2866,10 @@ footer p {
   .archive-intro h2 { font-size: 19vw; }
   .archive-controls { width: 100%; margin-top: 45px; }
   .habitat-filter { flex-wrap: wrap; }
+  .species-search input[type="search"] {
+    padding: 12px 40px 12px 40px;
+    font-size: 14px;
+  }
   .species-grid { grid-template-columns: 1fr; gap: 55px; }
   .species-card:nth-child(3n + 2) .species-image { margin-top: 0; }
   .species-image { aspect-ratio: 4 / 4.7 !important; }

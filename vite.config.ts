@@ -19,13 +19,6 @@ export default defineConfig(({ mode }) => {
       minify: !emitSourcemaps,
       target: 'es2020',
       cssCodeSplit: true,
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            react: ['react', 'react-dom'],
-          },
-        },
-      },
     },
     plugins: [
       react(),

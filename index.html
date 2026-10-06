@@ -1,22 +1,64 @@
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
-  <meta name="description" content="Wildform is an immersive digital natural history museum — explore 69 species through field-film, sound, and interactive archive." />
-  <link rel="canonical" href="https://amir-wildform.vercel.app/" />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0f0d" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://amir-wildform.vercel.app/" />
-  <meta property="og:title" content="Wildform — An Immersive Digital Natural History" />
-  <meta property="og:description" content="Explore 69 species through an immersive digital field guide." />
-  <meta property="og:image" content="https://amir-wildform.vercel.app/og-image.jpg" />
+    <!-- Indexing -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Wildform — An Immersive Digital Natural History" />
-  <meta name="twitter:description" content="Explore 69 species through an immersive digital field guide." />
-  <meta name="twitter:image" content="https://amir-wildform.vercel.app/og-image.jpg" />
+    <!-- Primary SEO -->
+    <title>Wildform — An Immersive Digital Natural History</title>
+    <meta
+      name="description"
+      content="Wildform is an immersive digital natural history museum. Explore 69 species through field-film, sound, and interactive archive."
+    />
+    <link rel="canonical" href="https://amir-wildform.vercel.app/" />
 
-  <title>Wildform — An Immersive Digital Natural History</title>
-</head>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Wildform" />
+    <meta property="og:url" content="https://amir-wildform.vercel.app/" />
+    <meta property="og:title" content="Wildform — An Immersive Digital Natural History" />
+    <meta
+      property="og:description"
+      content="Explore 69 species through an immersive digital field guide."
+    />
+    <meta property="og:image" content="https://amir-wildform.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Wildform — immersive natural history archive" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Wildform — An Immersive Digital Natural History" />
+    <meta
+      name="twitter:description"
+      content="Explore 69 species through an immersive digital field guide."
+    />
+    <meta name="twitter:image" content="https://amir-wildform.vercel.app/og-image.jpg" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Wildform",
+        "url": "https://amir-wildform.vercel.app/",
+        "description": "An immersive digital natural history museum.",
+        "inLanguage": "en"
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

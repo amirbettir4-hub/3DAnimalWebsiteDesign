@@ -25,6 +25,39 @@ body {
   background: #080b09;
 }
 
+/* ─── Smooth theme transition ──────────────────────────── */
+html.theme-changing,
+html.theme-changing *,
+html.theme-changing *::before,
+html.theme-changing *::after {
+  transition:
+    background-color .35s ease,
+    border-color .35s ease,
+    color .35s ease !important;
+}
+
+/* ─── Selection ────────────────────────────────────────── */
+::selection {
+  background: rgba(220,236,174,.35);
+  color: #f8f5e9;
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(74,112,80,.28);
+  color: #101810;
+}
+
+/* ─── Focus rings ──────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #dcecae;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+[data-theme="light"] :focus-visible {
+  outline-color: #4a7050;
+}
+
 .cursor-dot,
 .cursor-ring {
   position: fixed;
@@ -224,7 +257,6 @@ button {
   text-transform: uppercase;
 }
 
-/* 🌞🌚 THEME TOGGLE BUTTON 🌞🌚 */
 .theme-toggle {
   display: flex;
   width: 30px;
@@ -248,7 +280,6 @@ button {
   transform: rotate(-15deg) scale(.95);
 }
 
-/* 🎲 RANDOM SPECIES BUTTON 🎲 */
 .random-species-btn {
   display: grid;
   width: 30px;
@@ -286,6 +317,7 @@ button {
   min-height: 680px;
   overflow: hidden;
   background: #161f17;
+  transition: background .35s ease;
 }
 
 .hero-image {
@@ -295,6 +327,7 @@ button {
   background-size: cover;
   filter: saturate(.7) contrast(1.05);
   animation: hero-breathe 12s ease-in-out infinite alternate;
+  transition: filter .5s ease;
 }
 
 .hero::after {
@@ -304,6 +337,7 @@ button {
   background:
     linear-gradient(90deg, rgba(4,8,5,.78), rgba(4,8,5,.08) 62%),
     linear-gradient(0deg, rgba(4,8,5,.75), transparent 45%);
+  transition: background .5s ease;
 }
 
 .hero-grain, .specimen-noise {
@@ -1126,7 +1160,6 @@ h1, h2, h3, p {
   background: #c6dcbb;
 }
 
-/* ─── Species search ────────────────────────────────────── */
 .species-search {
   position: relative;
   display: flex;
@@ -1228,7 +1261,6 @@ h1, h2, h3, p {
   background: rgba(255, 255, 255, 0.14);
 }
 
-/* ─── Species of the day ────────────────────────────────── */
 .species-of-day {
   display: grid;
   grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
@@ -2595,7 +2627,7 @@ footer p {
 }
 
 /* 🌞🌚 ============================================
-   LIGHT MODE OVERRIDES
+   LIGHT MODE — the paper museum
    ============================================ */
 
 [data-theme="light"] {
@@ -2635,6 +2667,30 @@ footer p {
 
 [data-theme="light"] .random-species-btn:hover {
   background: rgba(26,32,26,.08);
+}
+
+/* ─── HERO — warmer daylight tone ─── */
+[data-theme="light"] .hero {
+  background: #d9ddc9;
+}
+
+[data-theme="light"] .hero-image {
+  filter: saturate(.75) contrast(1.02) brightness(1.05);
+}
+
+[data-theme="light"] .hero::after {
+  background:
+    linear-gradient(90deg, rgba(18,26,20,.68), rgba(18,26,20,.05) 62%),
+    linear-gradient(0deg, rgba(18,26,20,.62), transparent 45%);
+}
+
+[data-theme="light"] .hero h1 em {
+  color: #dcecae;
+}
+
+[data-theme="light"] .typewriter-line {
+  color: #dcecae;
+  border-right-color: #dcecae;
 }
 
 /* ─── SPECIMEN ─── */
@@ -2903,6 +2959,7 @@ footer p {
 [data-theme="light"] .species-habitat {
   border-color: rgba(26,32,26,.35);
   color: #1a201a;
+  background: rgba(255,255,255,.45);
 }
 
 [data-theme="light"] .species-number {
@@ -2942,7 +2999,63 @@ footer p {
   background: #4a7050;
 }
 
-/* Footer */
+/* ─── QUIZ — warmer tone in light mode ─── */
+[data-theme="light"] .quiz-section {
+  background: #e6ebd6;
+  color: #1a201a;
+}
+
+[data-theme="light"] .quiz-shell .eyebrow {
+  color: #4a7050;
+}
+
+[data-theme="light"] .quiz-shell .eyebrow span {
+  border-color: rgba(74,112,80,.4);
+}
+
+[data-theme="light"] .quiz-progress {
+  background: rgba(26,32,26,.15);
+}
+
+[data-theme="light"] .quiz-progress span {
+  background: #4a7050;
+}
+
+[data-theme="light"] .quiz-options button {
+  border-color: rgba(26,32,26,.2);
+  background: rgba(255,255,255,.4);
+}
+
+[data-theme="light"] .quiz-options button:hover {
+  border-color: rgba(74,112,80,.5);
+  background: rgba(74,112,80,.08);
+}
+
+[data-theme="light"] .quiz-result > strong {
+  color: #4a7050;
+}
+
+[data-theme="light"] .quiz-result button {
+  border-color: #4a7050;
+  background: #4a7050;
+}
+
+[data-theme="light"] .quiz-reveal button {
+  border-color: #4a7050;
+  color: #4a7050;
+}
+
+/* ─── JOURNAL — warmer paper tone in light mode ─── */
+[data-theme="light"] .journal {
+  background: #e6ebd8;
+  color: #1a201a;
+}
+
+[data-theme="light"] .journal .eyebrow {
+  color: #4a7050;
+}
+
+/* ─── FOOTER ─── */
 [data-theme="light"] footer {
   border-top-color: rgba(26,32,26,.1);
   background: #f1ede2;
@@ -2952,7 +3065,7 @@ footer p {
   color: rgba(26,32,26,.55);
 }
 
-/* Species modal */
+/* ─── SPECIES MODAL ─── */
 [data-theme="light"] .species-modal {
   background: rgba(240,236,224,.9);
 }
@@ -3048,6 +3161,18 @@ footer p {
 [data-theme="light"] .modal-image > p {
   color: #fff;
   text-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
+
+/* ─── STORY MODAL ─── */
+[data-theme="light"] .story-modal {
+  background: rgba(240,236,224,.94);
+}
+
+/* ─── SPECIES MARQUEE — softer in light mode ─── */
+[data-theme="light"] .species-marquee {
+  background: #cfe0b8;
+  color: #172018;
+  border-color: rgba(74,112,80,.25);
 }
 
 @media (max-width: 760px) {

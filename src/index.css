@@ -1258,7 +1258,6 @@ h1, h2, h3, p {
   background: rgba(255, 255, 255, 0.14);
 }
 
-/* ─── Compare open button ──────────────────────────────── */
 .compare-open-btn {
   display: inline-flex;
   align-items: center;
@@ -1920,6 +1919,245 @@ h1, h2, h3, p {
   letter-spacing: .12em;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+/* ─── Extinction memorial ──────────────────────────────── */
+.memoriam {
+  position: relative;
+  padding: 11vw 0 10vw;
+  overflow: hidden;
+  color: #e6e2d6;
+  background: #050505;
+  border-top: 1px solid rgba(230,239,226,.06);
+}
+
+.memoriam::before {
+  content: "MEMORIAM";
+  position: absolute;
+  top: 1vw;
+  right: -2vw;
+  color: rgba(230,239,226,.02);
+  font-family: "DM Sans", sans-serif;
+  font-size: 16vw;
+  font-weight: 600;
+  letter-spacing: -.06em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.memoriam-intro {
+  position: relative;
+  z-index: 2;
+  padding: 0 8vw;
+  margin-bottom: 7vw;
+  max-width: 1000px;
+}
+
+.memoriam .eyebrow {
+  color: #8a8a80;
+}
+
+.memoriam .eyebrow span {
+  border-color: rgba(230,226,214,.22);
+}
+
+.memoriam-intro h2 {
+  margin: 0 0 40px;
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(58px, 8vw, 130px);
+  font-weight: 400;
+  line-height: .82;
+  letter-spacing: -.04em;
+  color: #f2efe4;
+}
+
+.memoriam-intro h2 em {
+  color: #a89886;
+  font-weight: 400;
+}
+
+.memoriam-lede {
+  max-width: 620px;
+  margin: 0;
+  color: rgba(230,226,214,.55);
+  font-family: "Instrument Serif", serif;
+  font-size: 22px;
+  line-height: 1.55;
+}
+
+.memoriam-rail {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: stretch;
+  gap: 2vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 30px 8vw 50px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(230,226,214,.2) transparent;
+}
+
+.memoriam-rail::-webkit-scrollbar {
+  height: 6px;
+}
+
+.memoriam-rail::-webkit-scrollbar-thumb {
+  background: rgba(230,226,214,.18);
+  border-radius: 3px;
+}
+
+.memoriam-rail::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.memoriam-card {
+  flex: 0 0 clamp(280px, 26vw, 360px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 36px 30px 40px;
+  border: 1px solid rgba(230,226,214,.1);
+  background: rgba(230,226,214,.02);
+  scroll-snap-align: start;
+  animation: card-enter .8s cubic-bezier(.16,1,.3,1) both;
+  transition: border-color .4s, background .4s, transform .5s cubic-bezier(.16,1,.3,1);
+}
+
+.memoriam-card:hover {
+  border-color: rgba(230,226,214,.28);
+  background: rgba(230,226,214,.045);
+  transform: translateY(-4px);
+}
+
+.memoriam-card-year {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(230,226,214,.14);
+}
+
+.memoriam-card-year span {
+  color: rgba(230,226,214,.35);
+  font-family: "DM Mono", monospace;
+  font-size: 7px;
+  letter-spacing: .22em;
+}
+
+.memoriam-card-year strong {
+  color: #a89886;
+  font-family: "Instrument Serif", serif;
+  font-size: 62px;
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.memoriam-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.memoriam-card-body h3 {
+  margin: 0;
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(30px, 3vw, 42px);
+  font-weight: 400;
+  line-height: .95;
+  letter-spacing: -.02em;
+  color: #f2efe4;
+}
+
+.memoriam-sci {
+  margin: 8px 0 0;
+  color: #a89886;
+  font-family: "Instrument Serif", serif;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.memoriam-region {
+  margin: 16px 0 0;
+  color: rgba(230,226,214,.5);
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.memoriam-divider {
+  height: 1px;
+  margin: 22px 0;
+  background: rgba(230,226,214,.12);
+}
+
+.memoriam-label {
+  margin: 0 0 6px;
+  color: rgba(230,226,214,.35);
+  font-family: "DM Mono", monospace;
+  font-size: 7px;
+  letter-spacing: .2em;
+}
+
+.memoriam-cause {
+  margin: 0 0 20px;
+  color: rgba(230,226,214,.72);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.memoriam-relative {
+  margin: 0;
+  color: #a89886;
+  font-family: "Instrument Serif", serif;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.memoriam-endcap {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 60px;
+  color: rgba(230,226,214,.3);
+}
+
+.memoriam-endcap span {
+  font-family: "Instrument Serif", serif;
+  font-size: 60px;
+  line-height: 1;
+}
+
+.memoriam-endcap p {
+  margin: 0;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: .2em;
+  max-width: 140px;
+  line-height: 1.7;
+}
+
+.memoriam-footer {
+  margin: 5vw auto 0;
+  padding: 0 8vw;
+  max-width: 800px;
+  color: rgba(230,226,214,.4);
+  font-family: "Instrument Serif", serif;
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.memoriam-footer strong {
+  color: #a89886;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .journal {
@@ -2887,9 +3125,7 @@ footer p {
   50% { opacity: 1; transform: scale(1.15); }
 }
 
-/* 🌞🌚 ============================================
-   LIGHT MODE
-   ============================================ */
+/* 🌞🌚 LIGHT MODE */
 
 [data-theme="light"] {
   color-scheme: light;
@@ -3302,6 +3538,12 @@ footer p {
   color: #4a7050;
 }
 
+/* Memoriam light mode — stays dark, it's a memorial */
+[data-theme="light"] .memoriam {
+  background: #0f0e0b;
+  color: #e6e2d6;
+}
+
 [data-theme="light"] .journal {
   background: #e6ebd8;
   color: #1a201a;
@@ -3427,7 +3669,6 @@ footer p {
   border-color: rgba(74,112,80,.25);
 }
 
-/* Compare modal light mode */
 [data-theme="light"] .compare-modal {
   background: rgba(240,236,224,.94);
 }
@@ -3630,6 +3871,37 @@ footer p {
     grid-row: 2;
     grid-column: 1 / 3;
     justify-content: center;
+  }
+  .memoriam {
+    padding: 100px 0 80px;
+  }
+  .memoriam-intro {
+    padding: 0 7vw;
+    margin-bottom: 60px;
+  }
+  .memoriam-intro h2 {
+    font-size: 15vw;
+  }
+  .memoriam-lede {
+    font-size: 18px;
+  }
+  .memoriam-rail {
+    padding: 20px 7vw 40px;
+    gap: 20px;
+  }
+  .memoriam-card {
+    flex: 0 0 78vw;
+    padding: 30px 24px 34px;
+  }
+  .memoriam-card-year strong {
+    font-size: 52px;
+  }
+  .memoriam-endcap {
+    padding: 0 30px;
+  }
+  .memoriam-footer {
+    padding: 0 7vw;
+    font-size: 17px;
   }
   .quiz-section { grid-template-columns: 1fr; }
   .quiz-visual { min-height: 48vh; }

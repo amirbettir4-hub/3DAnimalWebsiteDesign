@@ -167,6 +167,83 @@ const speciesDetails: Record<(typeof species)[number]["scientific"], SpeciesDeta
   "Trichechus manatus": { diet: "Seagrass, aquatic plants", lifespan: "40–60 years", size: "3–4 metres", activity: "Day and night", fact: "Manatees are strict herbivores and can eat up to 10% of their body weight in plants every day." },
 };
 
+// ─── EXTINCTION MEMORIAL DATA ────────────────────────────────
+type ExtinctSpecies = {
+  name: string;
+  scientific: string;
+  year: string;
+  region: string;
+  cause: string;
+  relative: string;
+};
+
+const extinctSpecies: ExtinctSpecies[] = [
+  {
+    name: "Dodo",
+    scientific: "Raphus cucullatus",
+    year: "1681",
+    region: "Mauritius, Indian Ocean",
+    cause: "Introduced rats, pigs, and monkeys destroyed nests and eggs; sailors hunted adults for food.",
+    relative: "Nicobar pigeon",
+  },
+  {
+    name: "Great auk",
+    scientific: "Pinguinus impennis",
+    year: "1844",
+    region: "North Atlantic coastlines",
+    cause: "Centuries of hunting for meat, feathers, and oil — the last pair was killed on Eldey Island.",
+    relative: "Razorbill",
+  },
+  {
+    name: "Passenger pigeon",
+    scientific: "Ectopistes migratorius",
+    year: "1914",
+    region: "North America",
+    cause: "Commercial hunting and mass deforestation of the roosting forests it depended on.",
+    relative: "Mourning dove",
+  },
+  {
+    name: "Thylacine",
+    scientific: "Thylacinus cynocephalus",
+    year: "1936",
+    region: "Tasmania, Australia",
+    cause: "Government-funded bounty hunting and habitat loss; the last captive died in Hobart Zoo.",
+    relative: "Tasmanian devil",
+  },
+  {
+    name: "Pyrenean ibex",
+    scientific: "Capra pyrenaica pyrenaica",
+    year: "2000",
+    region: "Pyrenees, Spain and France",
+    cause: "Poaching and inability to compete for food with domestic livestock. Celia, the last known, was found dead under a fallen tree.",
+    relative: "Alpine ibex",
+  },
+  {
+    name: "Baiji",
+    scientific: "Lipotes vexillifer",
+    year: "2006",
+    region: "Yangtze River, China",
+    cause: "Industrial pollution, ship traffic, and bycatch — declared functionally extinct after a six-week expedition found none.",
+    relative: "Amazon river dolphin",
+  },
+  {
+    name: "Western black rhinoceros",
+    scientific: "Diceros bicornis longipes",
+    year: "2011",
+    region: "Cameroon, Central Africa",
+    cause: "Poaching for horn, driven by international demand and decades of under-protection.",
+    relative: "Black rhinoceros",
+  },
+  {
+    name: "Pinta Island tortoise",
+    scientific: "Chelonoidis abingdonii",
+    year: "2012",
+    region: "Galápagos Islands, Ecuador",
+    cause: "Introduced goats destroyed the vegetation it fed on; the last known individual, Lonesome George, died in captivity.",
+    relative: "Galápagos giant tortoise",
+  },
+];
+
 const quizQuestionBank = [
   { question: "Which creature has existed for more than 500 million years?", options: ["Moon jelly", "Snow leopard", "Toco toucan", "Red fox"], answer: 0, fact: "Jellyfish predate dinosaurs by hundreds of millions of years." },
   { question: "Which animal is the fastest runner on land?", options: ["Cheetah", "Kangaroo", "Bengal tiger", "African elephant"], answer: 0, fact: "A cheetah can accelerate to around 100 km/h in only a few seconds." },
@@ -423,8 +500,8 @@ export default function App() {
           <button onClick={() => goTo("film")}>Field film</button>
           <button onClick={() => goTo("specimen")}>Specimen 01</button>
           <button onClick={() => goTo("archive")}>Species</button>
+          <button onClick={() => goTo("memoriam")}>Memoriam</button>
           <button onClick={() => goTo("quiz")}>Quiz</button>
-          <button onClick={() => goTo("journal")}>Journal</button>
         </div>
 
         <button
@@ -668,8 +745,55 @@ export default function App() {
         </div>
       </section>
 
+      {/* ─── EXTINCTION MEMORIAL ──────────────────────────── */}
+      <section className="memoriam" id="memoriam" aria-label="Extinction memorial">
+        <div className="memoriam-intro">
+          <p className="eyebrow"><span>05</span> In memoriam</p>
+          <h2>The species<br />we will <em>never see again.</em></h2>
+          <p className="memoriam-lede">
+            Extinction is forever. These creatures were not lost to time — every one of them
+            disappeared within the reach of human history. The dates below are the last known
+            confirmed sighting of each species.
+          </p>
+        </div>
+
+        <div className="memoriam-rail" role="list" aria-label="Extinct species timeline">
+          {extinctSpecies.map((item, index) => (
+            <article
+              key={item.scientific}
+              className="memoriam-card"
+              role="listitem"
+              style={{ animationDelay: `${index * 0.08}s` }}
+            >
+              <div className="memoriam-card-year">
+                <span>LAST SEEN</span>
+                <strong>{item.year}</strong>
+              </div>
+              <div className="memoriam-card-body">
+                <h3>{item.name}</h3>
+                <p className="memoriam-sci">{item.scientific}</p>
+                <p className="memoriam-region">{item.region}</p>
+                <div className="memoriam-divider" />
+                <p className="memoriam-label">CAUSE OF EXTINCTION</p>
+                <p className="memoriam-cause">{item.cause}</p>
+                <p className="memoriam-label">CLOSEST LIVING RELATIVE</p>
+                <p className="memoriam-relative">{item.relative}</p>
+              </div>
+            </article>
+          ))}
+          <div className="memoriam-endcap" aria-hidden="true">
+            <span>·</span>
+            <p>{String(extinctSpecies.length).padStart(2, "0")} LOST · THIS IS A PARTIAL LIST</p>
+          </div>
+        </div>
+
+        <p className="memoriam-footer">
+          Extinction rates today are estimated at <strong>100–1,000×</strong> the natural background rate.
+        </p>
+      </section>
+
       <section className="journal" id="journal">
-        <p className="eyebrow"><span>05</span> Field notes</p>
+        <p className="eyebrow"><span>06</span> Field notes</p>
         <div className="journal-heading"><h2>Every creature<br />holds a <em>story.</em></h2><p>Stories from the edge of the known world, told through science, cinema, and digital craft.</p></div>
         <article className="journal-card" role="button" tabIndex={0} aria-label="Read Ghosts of the flooded forest" onClick={() => { setJournalOpen(true); playTone(390); }} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { setJournalOpen(true); } }}>
           <div>

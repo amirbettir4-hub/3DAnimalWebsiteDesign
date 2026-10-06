@@ -117,7 +117,7 @@ button {
   mix-blend-mode: difference;
 }
 
-.brand, .nav-links button, .menu-button, .sound-toggle, .theme-toggle {
+.brand, .nav-links button, .menu-button, .sound-toggle, .theme-toggle, .random-species-btn {
   border: 0;
   background: transparent;
   cursor: pointer;
@@ -246,6 +246,34 @@ button {
 
 .theme-toggle:active {
   transform: rotate(-15deg) scale(.95);
+}
+
+/* 🎲 RANDOM SPECIES BUTTON 🎲 */
+.random-species-btn {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  margin-right: 14px;
+  padding: 0;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: transparent;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), background .3s;
+}
+
+.random-species-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.random-species-btn:hover {
+  background: rgba(255,255,255,.12);
+  transform: rotate(180deg);
+}
+
+.random-species-btn:active {
+  transform: rotate(180deg) scale(.9);
 }
 
 .menu-button {
@@ -1198,6 +1226,127 @@ h1, h2, h3, p {
 
 .species-empty button:hover {
   background: rgba(255, 255, 255, 0.14);
+}
+
+/* ─── Species of the day ────────────────────────────────── */
+.species-of-day {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  width: 100%;
+  min-height: 320px;
+  margin: 0 0 5vw;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(230,239,226,.14);
+  background: rgba(255,255,255,.02);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .4s, background .4s, transform .5s cubic-bezier(.16,1,.3,1);
+}
+
+.species-of-day:hover {
+  border-color: rgba(198,220,187,.45);
+  background: rgba(255,255,255,.05);
+}
+
+.species-of-day:focus-visible {
+  outline: 1px solid #c6dcbb;
+  outline-offset: 6px;
+}
+
+.species-of-day-image {
+  position: relative;
+  min-height: 320px;
+  background-position: center;
+  background-size: cover;
+  filter: saturate(.75);
+  transition: filter .5s;
+}
+
+.species-of-day:hover .species-of-day-image {
+  filter: saturate(1);
+}
+
+.species-of-day-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 55%, rgba(6,12,8,.35));
+}
+
+.species-of-day-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(28px, 4vw, 56px);
+}
+
+.species-of-day-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 0 0 22px;
+  color: #a8c49c;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: .16em;
+}
+
+.species-of-day-kicker i {
+  font-style: normal;
+  color: rgba(237,242,233,.4);
+}
+
+.species-of-day-body h3 {
+  margin: 0;
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 400;
+  line-height: .9;
+  letter-spacing: -.03em;
+}
+
+.species-of-day-sci {
+  margin: 12px 0 0;
+  color: #a8c49c;
+  font-family: "Instrument Serif", serif;
+  font-size: 19px;
+  font-style: italic;
+}
+
+.species-of-day-fact {
+  max-width: 520px;
+  margin: 22px 0 0;
+  color: rgba(237,242,233,.6);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.species-of-day-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  color: #c6dcbb;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transition: gap .3s;
+}
+
+.species-of-day-cta svg {
+  width: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.species-of-day:hover .species-of-day-cta {
+  gap: 16px;
 }
 
 .species-grid {
@@ -2631,6 +2780,45 @@ footer p {
   background: rgba(26, 32, 26, 0.12);
 }
 
+/* ─── Species of the day (light mode) ─── */
+[data-theme="light"] .species-of-day {
+  border-color: rgba(26,32,26,.14);
+  background: rgba(26,32,26,.02);
+}
+
+[data-theme="light"] .species-of-day:hover {
+  border-color: rgba(74,112,80,.4);
+  background: rgba(74,112,80,.05);
+}
+
+[data-theme="light"] .species-of-day-image::after {
+  background: linear-gradient(90deg, transparent 55%, rgba(240,236,224,.35));
+}
+
+[data-theme="light"] .species-of-day-kicker {
+  color: #4a7050;
+}
+
+[data-theme="light"] .species-of-day-kicker i {
+  color: rgba(26,32,26,.45);
+}
+
+[data-theme="light"] .species-of-day-body h3 {
+  color: #1a201a;
+}
+
+[data-theme="light"] .species-of-day-sci {
+  color: #4a7050;
+}
+
+[data-theme="light"] .species-of-day-fact {
+  color: rgba(26,32,26,.68);
+}
+
+[data-theme="light"] .species-of-day-cta {
+  color: #4a7050;
+}
+
 [data-theme="light"] .species-content p {
   color: #5a7550;
 }
@@ -2830,6 +3018,9 @@ footer p {
     height: 26px;
     font-size: 12px;
   }
+  .random-species-btn {
+    margin-right: 10px;
+  }
   .menu-button span {
     width: 100%;
     height: 1px;
@@ -2869,6 +3060,25 @@ footer p {
   .species-search input[type="search"] {
     padding: 12px 40px 12px 40px;
     font-size: 14px;
+  }
+  .species-of-day {
+    grid-template-columns: 1fr;
+    margin-bottom: 60px;
+  }
+  .species-of-day-image {
+    min-height: 240px;
+  }
+  .species-of-day-image::after {
+    background: linear-gradient(180deg, transparent 55%, rgba(6,12,8,.4));
+  }
+  [data-theme="light"] .species-of-day-image::after {
+    background: linear-gradient(180deg, transparent 55%, rgba(240,236,224,.4));
+  }
+  .species-of-day-body {
+    padding: 30px 22px 32px;
+  }
+  .species-of-day-body h3 {
+    font-size: 13vw;
   }
   .species-grid { grid-template-columns: 1fr; gap: 55px; }
   .species-card:nth-child(3n + 2) .species-image { margin-top: 0; }

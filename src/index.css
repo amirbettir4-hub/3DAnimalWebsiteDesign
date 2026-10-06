@@ -1258,10 +1258,18 @@ h1, h2, h3, p {
 .species-of-day-image {
   position: relative;
   min-height: 320px;
-  background-position: center;
-  background-size: cover;
+  overflow: hidden;
   filter: saturate(.75);
   transition: filter .5s;
+}
+
+.species-of-day-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .species-of-day:hover .species-of-day-image {
@@ -1273,6 +1281,8 @@ h1, h2, h3, p {
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, transparent 55%, rgba(6,12,8,.35));
+  pointer-events: none;
+  z-index: 1;
 }
 
 .species-of-day-body {
@@ -1388,10 +1398,17 @@ h1, h2, h3, p {
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  background-position: center;
-  background-size: cover;
   filter: saturate(.68);
   transition: filter .6s;
+}
+
+.species-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .species-card:nth-child(3n + 2) .species-image {
@@ -1407,6 +1424,7 @@ h1, h2, h3, p {
     linear-gradient(180deg, rgba(2,7,4,.5), transparent 28%, transparent 60%, rgba(2,7,4,.65)),
     linear-gradient(90deg, rgba(9,16,10,.2), transparent);
   transition: background .6s;
+  pointer-events: none;
 }
 
 .species-card:hover .species-image {
@@ -1424,6 +1442,7 @@ h1, h2, h3, p {
   inset: 13px;
   border: 1px solid rgba(255,255,255,0);
   transition: border-color .5s, inset .5s;
+  pointer-events: none;
 }
 
 .species-card:hover .species-image::before {
@@ -1442,6 +1461,7 @@ h1, h2, h3, p {
 }
 
 .species-number { left: 18px; }
+
 .species-habitat {
   right: 18px;
   padding: 6px 9px;
@@ -1618,10 +1638,18 @@ h1, h2, h3, p {
 .quiz-image {
   position: absolute;
   inset: -3%;
-  background-position: center;
-  background-size: cover;
+  overflow: hidden;
   filter: saturate(.5) contrast(1.08);
   animation: quiz-image-drift 14s ease-in-out infinite alternate;
+}
+
+.quiz-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .quiz-image-overlay {
@@ -1888,10 +1916,20 @@ h1, h2, h3, p {
 }
 
 .journal-card > div {
+  position: relative;
   height: 230px;
-  background-position: center 30%;
-  background-size: cover;
+  overflow: hidden;
   filter: saturate(.75);
+}
+
+.journal-card > div img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
 }
 
 .journal-card p {
@@ -2003,10 +2041,19 @@ footer p {
   display: flex;
   min-height: 72vh;
   align-items: end;
+  overflow: hidden;
   padding: 7vw;
   color: #fff;
-  background-position: center 34%;
-  background-size: cover;
+}
+
+.story-hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 34%;
+  display: block;
 }
 
 .story-hero::after {
@@ -2016,6 +2063,8 @@ footer p {
   background:
     linear-gradient(0deg, rgba(2,8,4,.85), transparent 68%),
     linear-gradient(90deg, rgba(2,8,4,.46), transparent 60%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .story-hero > div {
@@ -2285,8 +2334,17 @@ footer p {
 .modal-image {
   position: relative;
   min-height: min(76vh, 760px);
-  background-position: center;
-  background-size: cover;
+  overflow: hidden;
+}
+
+.modal-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .modal-image::after {
@@ -2294,6 +2352,8 @@ footer p {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(3,9,6,.42), transparent 35%, rgba(3,9,6,.6));
+  pointer-events: none;
+  z-index: 1;
 }
 
 .modal-image > span,
@@ -2536,10 +2596,6 @@ footer p {
 
 /* 🌞🌚 ============================================
    LIGHT MODE OVERRIDES
-   Dark mode stays exactly the same.
-   When user clicks the toggle, [data-theme="light"]
-   is applied on the <html> element and these rules
-   kick in.
    ============================================ */
 
 [data-theme="light"] {
@@ -2573,7 +2629,15 @@ footer p {
   background: #4a7050;
 }
 
-/* ─── SPECIMEN (dark → light) ─── */
+[data-theme="light"] .random-species-btn {
+  color: #1a201a;
+}
+
+[data-theme="light"] .random-species-btn:hover {
+  background: rgba(26,32,26,.08);
+}
+
+/* ─── SPECIMEN ─── */
 [data-theme="light"] .specimen {
   background:
     radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(120,170,130,.35), transparent 38%),
@@ -2692,7 +2756,7 @@ footer p {
   color: rgba(26,36,26,.5);
 }
 
-/* ─── ARCHIVE (dark → light) ─── */
+/* ─── ARCHIVE ─── */
 [data-theme="light"] .archive {
   background:
     radial-gradient(circle at 90% 10%, rgba(120,170,130,.18), transparent 30%),
@@ -2736,7 +2800,7 @@ footer p {
   background: #4a7050;
 }
 
-/* ─── Species search (light mode) ─── */
+/* Species search */
 [data-theme="light"] .species-search .search-icon {
   color: rgba(26, 32, 26, 0.5);
 }
@@ -2780,7 +2844,7 @@ footer p {
   background: rgba(26, 32, 26, 0.12);
 }
 
-/* ─── Species of the day (light mode) ─── */
+/* Species of the day */
 [data-theme="light"] .species-of-day {
   border-color: rgba(26,32,26,.14);
   background: rgba(26,32,26,.02);
@@ -2878,7 +2942,7 @@ footer p {
   background: #4a7050;
 }
 
-/* ─── FOOTER (dark → light) ─── */
+/* Footer */
 [data-theme="light"] footer {
   border-top-color: rgba(26,32,26,.1);
   background: #f1ede2;
@@ -2888,7 +2952,7 @@ footer p {
   color: rgba(26,32,26,.55);
 }
 
-/* ─── SPECIES MODAL (dark → light) ─── */
+/* Species modal */
 [data-theme="light"] .species-modal {
   background: rgba(240,236,224,.9);
 }

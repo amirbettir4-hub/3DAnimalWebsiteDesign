@@ -76,6 +76,13 @@ const species = [
   { name: "Okapi", scientific: "Okapia johnstoni", habitat: "Land", region: "Congo rainforest", status: "Endangered", image: "https://images.unsplash.com/photo-1785277168940-9ac364c6c085?auto=format&fit=crop&w=1400&q=88" },
   { name: "Blue wildebeest", scientific: "Connochaetes taurinus", habitat: "Land", region: "African savanna", status: "Stable", image: "https://images.unsplash.com/photo-1517118828960-de5ea37d8ae6?auto=format&fit=crop&w=1400&q=88" },
   { name: "Emperor penguin", scientific: "Aptenodytes forsteri", habitat: "Ocean", region: "Antarctica", status: "Near threatened", image: "https://images.unsplash.com/photo-1587606605848-7395dfb56d90?auto=format&fit=crop&w=1400&q=88" },
+  { name: "Axolotl", scientific: "Ambystoma mexicanum", habitat: "Wetlands", region: "Mexico City canals", status: "Critically endangered", image: "https://images.unsplash.com/photo-1718393178841-015484337266?auto=format&fit=crop&w=1400&q=88" },
+  { name: "Pangolin", scientific: "Manis pentadactyla", habitat: "Land", region: "South and Southeast Asia", status: "Critically endangered", image: "https://images.unsplash.com/photo-1603703661537-137f7373028a?auto=format&fit=crop&w=1400&q=88" },
+  { name: "Platypus", scientific: "Ornithorhynchus anatinus", habitat: "Wetlands", region: "Eastern Australia", status: "Near threatened", image: "https://images.unsplash.com/photo-1709187149178-8142bdac880c?auto=format&fit=crop&w=1400&q=88" },
+  { name: "Narwhal", scientific: "Monodon monoceros", habitat: "Ocean", region: "Arctic waters", status: "Least concern", image: "https://images.unsplash.com/photo-1706957782008-c26bd6c10840?auto=format&fit=crop&w=1400&q=88" },
+  { name: "Beluga whale", scientific: "Delphinapterus leucas", habitat: "Ocean", region: "Arctic and sub-Arctic", status: "Least concern", image: "https://images.unsplash.com/photo-1470093851219-69951fcbb533?auto=format&fit=crop&w=1400&q=88" },
+  { name: "Hammerhead shark", scientific: "Sphyrna mokarran", habitat: "Ocean", region: "Tropical coastlines", status: "Critically endangered", image: "https://images.unsplash.com/photo-1564360827970-90aea1384d80?auto=format&fit=crop&w=1400&q=88" },
+  { name: "Arctic fox", scientific: "Vulpes lagopus", habitat: "Land", region: "Arctic tundra", status: "Least concern", image: "https://images.unsplash.com/photo-1502727002602-2e55a2b341a4?auto=format&fit=crop&w=1400&q=88" },
 ] as const;
 
 type SpeciesDetail = { diet: string; lifespan: string; size: string; activity: string; fact: string; };
@@ -151,6 +158,13 @@ const speciesDetails: Record<(typeof species)[number]["scientific"], SpeciesDeta
   "Okapia johnstoni": { diet: "Leaves, buds, fruit", lifespan: "20–30 years", size: "1.9–2.5 metres", activity: "Daytime", fact: "The okapi is the giraffe's closest living relative despite its zebra-like leg stripes." },
   "Connochaetes taurinus": { diet: "Short grasses", lifespan: "15–20 years", size: "1.7–2.4 metres", activity: "Daytime", fact: "Vast herds follow seasonal rains in one of the planet's largest land migrations." },
   "Aptenodytes forsteri": { diet: "Fish, krill, squid", lifespan: "15–20 years", size: "100–130 cm", activity: "Day and night", fact: "Males incubate a single egg on their feet through the Antarctic winter without feeding." },
+  "Ambystoma mexicanum": { diet: "Worms, insects, small fish", lifespan: "10–15 years", size: "15–30 cm", activity: "Mostly nocturnal", fact: "Unlike most amphibians, axolotls never fully metamorphose and keep their feathery gills for life." },
+  "Manis pentadactyla": { diet: "Ants and termites", lifespan: "Unknown in the wild", size: "40–60 cm", activity: "Nocturnal", fact: "Its keratin scales are the most trafficked mammal product in the world." },
+  "Ornithorhynchus anatinus": { diet: "Insect larvae, shrimp", lifespan: "10–17 years", size: "38–60 cm", activity: "Dawn and dusk", fact: "The male platypus delivers venom through a spur on its hind leg, and it can sense prey through electroreception." },
+  "Monodon monoceros": { diet: "Halibut, squid, shrimp", lifespan: "30–50 years", size: "4–5.5 metres", activity: "Day and night", fact: "Its tusk is actually an elongated tooth packed with millions of nerve endings, likely used to sense its environment." },
+  "Delphinapterus leucas": { diet: "Fish, squid, crustaceans", lifespan: "35–50 years", size: "3.5–5.5 metres", activity: "Day and night", fact: "Belugas are nicknamed sea canaries because of their wide range of chirps, whistles, and clicks." },
+  "Sphyrna mokarran": { diet: "Rays, squid, crustaceans", lifespan: "20–30 years", size: "3.5–6 metres", activity: "Day and night", fact: "Its wide head improves its vision and gives extra space for the electroreceptors it uses to find prey." },
+  "Vulpes lagopus": { diet: "Lemmings, birds, fish", lifespan: "3–6 years", size: "46–68 cm", activity: "Dawn and dusk", fact: "Its coat changes from white in winter to brown in summer, and it can survive temperatures below −50°C." },
 };
 
 const quizQuestionBank = [
@@ -242,11 +256,9 @@ export default function App() {
   const [quizComplete, setQuizComplete] = useState(false);
   const [activeQuiz, setActiveQuiz] = useState(createQuiz);
   const [soundOn, setSoundOn] = useState(false);
-  
-  // 🌞🌚 NEW: Theme State
+
   const [theme, setTheme] = useState<"dark" | "light">("dark");
 
-  // 🌞🌚 NEW: Apply theme to the HTML tag
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -344,10 +356,9 @@ export default function App() {
           <button onClick={() => goTo("quiz")}>Quiz</button>
           <button onClick={() => goTo("journal")}>Journal</button>
         </div>
-        
-        {/* 🌞🌚 NEW: Theme Toggle Button */}
-        <button 
-          className="theme-toggle" 
+
+        <button
+          className="theme-toggle"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           aria-label="Toggle light and dark mode"
         >

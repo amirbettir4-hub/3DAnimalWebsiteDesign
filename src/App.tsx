@@ -79,10 +79,10 @@ const species = [
   { name: "Axolotl", scientific: "Ambystoma mexicanum", habitat: "Wetlands", region: "Mexico City canals", status: "Critically endangered", image: "https://images.unsplash.com/photo-1718393178841-015484337266?auto=format&fit=crop&w=1400&q=88" },
   { name: "Pangolin", scientific: "Manis pentadactyla", habitat: "Land", region: "South and Southeast Asia", status: "Critically endangered", image: "https://images.unsplash.com/photo-1603703661537-137f7373028a?auto=format&fit=crop&w=1400&q=88" },
   { name: "Platypus", scientific: "Ornithorhynchus anatinus", habitat: "Wetlands", region: "Eastern Australia", status: "Near threatened", image: "https://images.unsplash.com/photo-1709187149178-8142bdac880c?auto=format&fit=crop&w=1400&q=88" },
-  { name: "Narwhal", scientific: "Monodon monoceros", habitat: "Ocean", region: "Arctic waters", status: "Least concern", image: "https://images.unsplash.com/photo-1706957782008-c26bd6c10840?auto=format&fit=crop&w=1400&q=88" },
-  { name: "Beluga whale", scientific: "Delphinapterus leucas", habitat: "Ocean", region: "Arctic and sub-Arctic", status: "Least concern", image: "https://images.unsplash.com/photo-1470093851219-69951fcbb533?auto=format&fit=crop&w=1400&q=88" },
-  { name: "Hammerhead shark", scientific: "Sphyrna mokarran", habitat: "Ocean", region: "Tropical coastlines", status: "Critically endangered", image: "https://images.unsplash.com/photo-1564360827970-90aea1384d80?auto=format&fit=crop&w=1400&q=88" },
-  { name: "Arctic fox", scientific: "Vulpes lagopus", habitat: "Land", region: "Arctic tundra", status: "Least concern", image: "https://images.unsplash.com/photo-1502727002602-2e55a2b341a4?auto=format&fit=crop&w=1400&q=88" },
+  { name: "Hammerhead shark", scientific: "Sphyrna mokarran", habitat: "Ocean", region: "Tropical coastlines", status: "Critically endangered", image: "https://images.unsplash.com/photo-1706957782008-c26bd6c10840?auto=format&fit=crop&w=1400&q=88" },
+  { name: "Arctic fox", scientific: "Vulpes lagopus", habitat: "Land", region: "Arctic tundra", status: "Least concern", image: "https://images.unsplash.com/photo-1470093851219-69951fcbb533?auto=format&fit=crop&w=1400&q=88" },
+  { name: "Tasmanian devil", scientific: "Sarcophilus harrisii", habitat: "Land", region: "Tasmania", status: "Endangered", image: "https://images.unsplash.com/photo-1564360827970-90aea1384d80?auto=format&fit=crop&w=1400&q=88" },
+  { name: "Manatee", scientific: "Trichechus manatus", habitat: "Ocean", region: "Caribbean and Gulf coast", status: "Vulnerable", image: "https://images.unsplash.com/photo-1502727002602-2e55a2b341a4?auto=format&fit=crop&w=1400&q=88" },
 ] as const;
 
 type SpeciesDetail = { diet: string; lifespan: string; size: string; activity: string; fact: string; };
@@ -161,10 +161,10 @@ const speciesDetails: Record<(typeof species)[number]["scientific"], SpeciesDeta
   "Ambystoma mexicanum": { diet: "Worms, insects, small fish", lifespan: "10–15 years", size: "15–30 cm", activity: "Mostly nocturnal", fact: "Unlike most amphibians, axolotls never fully metamorphose and keep their feathery gills for life." },
   "Manis pentadactyla": { diet: "Ants and termites", lifespan: "Unknown in the wild", size: "40–60 cm", activity: "Nocturnal", fact: "Its keratin scales are the most trafficked mammal product in the world." },
   "Ornithorhynchus anatinus": { diet: "Insect larvae, shrimp", lifespan: "10–17 years", size: "38–60 cm", activity: "Dawn and dusk", fact: "The male platypus delivers venom through a spur on its hind leg, and it can sense prey through electroreception." },
-  "Monodon monoceros": { diet: "Halibut, squid, shrimp", lifespan: "30–50 years", size: "4–5.5 metres", activity: "Day and night", fact: "Its tusk is actually an elongated tooth packed with millions of nerve endings, likely used to sense its environment." },
-  "Delphinapterus leucas": { diet: "Fish, squid, crustaceans", lifespan: "35–50 years", size: "3.5–5.5 metres", activity: "Day and night", fact: "Belugas are nicknamed sea canaries because of their wide range of chirps, whistles, and clicks." },
   "Sphyrna mokarran": { diet: "Rays, squid, crustaceans", lifespan: "20–30 years", size: "3.5–6 metres", activity: "Day and night", fact: "Its wide head improves its vision and gives extra space for the electroreceptors it uses to find prey." },
   "Vulpes lagopus": { diet: "Lemmings, birds, fish", lifespan: "3–6 years", size: "46–68 cm", activity: "Dawn and dusk", fact: "Its coat changes from white in winter to brown in summer, and it can survive temperatures below −50°C." },
+  "Sarcophilus harrisii": { diet: "Carrion, small mammals, birds", lifespan: "5–6 years", size: "57–65 cm", activity: "Nocturnal", fact: "Its powerful bite is stronger per kilogram than any other mammal's, and it can eat up to 40% of its body weight in one sitting." },
+  "Trichechus manatus": { diet: "Seagrass, aquatic plants", lifespan: "40–60 years", size: "3–4 metres", activity: "Day and night", fact: "Manatees are strict herbivores and can eat up to 10% of their body weight in plants every day." },
 };
 
 const quizQuestionBank = [

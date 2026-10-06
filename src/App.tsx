@@ -243,6 +243,7 @@ export default function App() {
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const cursorRingRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<{ context: AudioContext; gain: GainNode; oscillators: OscillatorNode[]; } | null>(null);
+  const themeInitRef = useRef(false);
   const [progress, setProgress] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
@@ -269,6 +270,12 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    if (themeInitRef.current) {
+      document.documentElement.classList.add("theme-changing");
+      const timer = window.setTimeout(() => document.documentElement.classList.remove("theme-changing"), 420);
+      return () => window.clearTimeout(timer);
+    }
+    themeInitRef.current = true;
   }, [theme]);
 
   useEffect(() => {

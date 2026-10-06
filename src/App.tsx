@@ -262,7 +262,6 @@ export default function App() {
 
   const [theme, setTheme] = useState<"dark" | "light">("dark");
 
-  // Species of the day — same animal all day, changes at midnight UTC
   const speciesOfDayIndex = useMemo(() => {
     const dayNumber = Math.floor(Date.now() / 86_400_000);
     return (dayNumber * 7 + 13) % species.length;
@@ -413,7 +412,7 @@ export default function App() {
       </nav>
 
       <section className="hero" id="home">
-        <div className="hero-image" style={{ backgroundImage: `url(${leopard})` }} />
+        <div className="hero-image" style={{ backgroundImage: `url(${leopard})` }} role="img" aria-label="African leopard resting in low light" />
         <div className="hero-grain" />
         <div className="hero-copy">
           <p className="eyebrow"><span>01</span> A digital natural history</p>
@@ -504,18 +503,19 @@ export default function App() {
           </div>
         </div>
 
-        {/* ─── SPECIES OF THE DAY ─────────────────────────────── */}
         <button
           className="species-of-day"
           onClick={() => { setSelectedSpecies(speciesOfDayIndex); playTone(340); }}
           aria-label={`Open field profile for ${species[speciesOfDayIndex].name}, species of the day`}
         >
-          <div
-            className="species-of-day-image"
-            style={{ backgroundImage: `url(${species[speciesOfDayIndex].image})` }}
-            role="img"
-            aria-label={species[speciesOfDayIndex].name}
-          />
+          <div className="species-of-day-image">
+            <img
+              src={species[speciesOfDayIndex].image}
+              alt={`${species[speciesOfDayIndex].name} — ${species[speciesOfDayIndex].region}`}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <div className="species-of-day-body">
             <p className="species-of-day-kicker">
               <span>SPECIES OF THE DAY</span>
@@ -540,7 +540,13 @@ export default function App() {
           )}
           {pagedSpecies.map((animal, index) => (
               <button className="species-card" key={animal.scientific} onClick={() => { setSelectedSpecies(species.indexOf(animal)); playTone(330 + index * 12); }} aria-label={`Open field profile for ${animal.name}`}>
-                <div className="species-image" style={{ backgroundImage: `url(${animal.image})` }} role="img" aria-label={animal.name}>
+                <div className="species-image">
+                  <img
+                    src={animal.image}
+                    alt={`${animal.name} — ${animal.region}`}
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <span className="species-number">{String(archivePage * 12 + index + 1).padStart(2, "0")}</span>
                   <span className="species-habitat">{animal.habitat}</span>
                   <div className="species-scan" />
@@ -566,7 +572,14 @@ export default function App() {
 
       <section className="quiz-section" id="quiz">
         <div className="quiz-visual">
-          <div className="quiz-image" style={{ backgroundImage: `url(${species[33].image})` }} />
+          <div className="quiz-image">
+            <img
+              src={species[33].image}
+              alt={`${species[33].name} — ${species[33].region}`}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <div className="quiz-image-overlay" />
           <p>FIELD TEST / 01</p><span>TEST YOUR INSTINCTS</span>
         </div>
@@ -613,7 +626,14 @@ export default function App() {
         <p className="eyebrow"><span>05</span> Field notes</p>
         <div className="journal-heading"><h2>Every creature<br />holds a <em>story.</em></h2><p>Stories from the edge of the known world, told through science, cinema, and digital craft.</p></div>
         <article className="journal-card" role="button" tabIndex={0} aria-label="Read Ghosts of the flooded forest" onClick={() => { setJournalOpen(true); playTone(390); }} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { setJournalOpen(true); } }}>
-          <div style={{ backgroundImage: `url(${leopard})` }} />
+          <div>
+            <img
+              src={leopard}
+              alt="African leopard moving through a flooded forest"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <p>CONSERVATION · 8 MIN READ</p><h3>Ghosts of the flooded forest</h3>
           <button aria-label="Read story"><ArrowIcon /></button>
         </article>
@@ -625,7 +645,12 @@ export default function App() {
         <div className="species-modal" role="dialog" aria-modal="true" aria-label={`${species[selectedSpecies].name} field profile`} onMouseDown={(event) => { if (event.target === event.currentTarget) setSelectedSpecies(null); }}>
           <div className="modal-panel">
             <button className="modal-close" onClick={() => setSelectedSpecies(null)} aria-label="Close field profile"><span /><span /></button>
-            <div className="modal-image" style={{ backgroundImage: `url(${species[selectedSpecies].image})` }} role="img" aria-label={species[selectedSpecies].name}>
+            <div className="modal-image">
+              <img
+                src={species[selectedSpecies].image}
+                alt={`${species[selectedSpecies].name} in ${species[selectedSpecies].region}`}
+                decoding="async"
+              />
               <span>{String(selectedSpecies + 1).padStart(2, "0")} / {species.length}</span><p>FIELD PROFILE</p>
             </div>
             <div className="modal-content">
@@ -659,7 +684,12 @@ export default function App() {
         <div className="story-modal" role="dialog" aria-modal="true" aria-label="Ghosts of the flooded forest article" onMouseDown={(event) => { if (event.target === event.currentTarget) setJournalOpen(false); }}>
           <article className="story-panel">
             <button className="story-close" onClick={() => setJournalOpen(false)} aria-label="Close article"><span /><span /></button>
-            <header className="story-hero" style={{ backgroundImage: `url(${leopard})` }}>
+            <header className="story-hero">
+              <img
+                src={leopard}
+                alt="African leopard moving through the flooded Okavango Delta"
+                decoding="async"
+              />
               <div><p>FIELD NOTE 001 · OKAVANGO DELTA</p><h2>Ghosts of the<br /><em>flooded forest.</em></h2><span>Words from the field · 8 minute read</span></div>
             </header>
             <div className="story-body">

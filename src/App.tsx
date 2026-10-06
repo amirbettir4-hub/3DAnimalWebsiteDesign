@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const leopard =
   "https://images.unsplash.com/photo-1544979590-37e9b47eb705?auto=format&fit=crop&w=2200&q=90";
@@ -215,6 +215,7 @@ function conservationContext(status: string) {
 }
 
 function ArrowIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>; }
+function ShuffleIcon() { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 3h5v5" /><path d="M4 20 21 3" /><path d="M21 16v5h-5" /><path d="m15 15 6 6" /><path d="M4 4l5 5" /></svg>; }
 
 function JellySculpture() {
   return (
@@ -260,6 +261,12 @@ export default function App() {
   const [soundOn, setSoundOn] = useState(false);
 
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  // Species of the day — same animal all day, changes at midnight UTC
+  const speciesOfDayIndex = useMemo(() => {
+    const dayNumber = Math.floor(Date.now() / 86_400_000);
+    return (dayNumber * 7 + 13) % species.length;
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -356,6 +363,13 @@ export default function App() {
     audioRef.current = { context, gain, oscillators }; setSoundOn(true);
   };
 
+  const openRandomSpecies = () => {
+    let next = Math.floor(Math.random() * species.length);
+    if (next === selectedSpecies && species.length > 1) next = (next + 1) % species.length;
+    setSelectedSpecies(next);
+    playTone(280 + Math.random() * 220);
+  };
+
   return (
     <main>
       <div className="cursor-dot" ref={cursorDotRef} />
@@ -372,6 +386,15 @@ export default function App() {
           <button onClick={() => goTo("quiz")}>Quiz</button>
           <button onClick={() => goTo("journal")}>Journal</button>
         </div>
+
+        <button
+          className="random-species-btn"
+          onClick={openRandomSpecies}
+          aria-label="Open a random species"
+          title="Surprise me"
+        >
+          <ShuffleIcon />
+        </button>
 
         <button
           className="theme-toggle"
@@ -480,6 +503,34 @@ export default function App() {
             </div>
           </div>
         </div>
+
+        {/* ─── SPECIES OF THE DAY ─────────────────────────────── */}
+        <button
+          className="species-of-day"
+          onClick={() => { setSelectedSpecies(speciesOfDayIndex); playTone(340); }}
+          aria-label={`Open field profile for ${species[speciesOfDayIndex].name}, species of the day`}
+        >
+          <div
+            className="species-of-day-image"
+            style={{ backgroundImage: `url(${species[speciesOfDayIndex].image})` }}
+            role="img"
+            aria-label={species[speciesOfDayIndex].name}
+          />
+          <div className="species-of-day-body">
+            <p className="species-of-day-kicker">
+              <span>SPECIES OF THE DAY</span>
+              <i>{String(speciesOfDayIndex + 1).padStart(2, "0")} / {String(species.length).padStart(2, "0")}</i>
+            </p>
+            <h3>{species[speciesOfDayIndex].name}</h3>
+            <p className="species-of-day-sci">{species[speciesOfDayIndex].scientific}</p>
+            <p className="species-of-day-fact">{speciesDetails[species[speciesOfDayIndex].scientific].fact}</p>
+            <span className="species-of-day-cta">
+              Open field profile
+              <ArrowIcon />
+            </span>
+          </div>
+        </button>
+
         <div className="species-grid">
           {pagedSpecies.length === 0 && (
             <div className="species-empty">
